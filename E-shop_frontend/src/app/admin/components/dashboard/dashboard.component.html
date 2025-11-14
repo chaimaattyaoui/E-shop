@@ -1,0 +1,85 @@
+<div class="products-container">
+  <!-- Barre de recherche -->
+  <form [formGroup]="searchProductForm" class="search-form" (submit)="submitForm()">
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Rechercher un produit</mat-label>
+      <input matInput formControlName="title" placeholder="Entrez le nom d'un produit...">
+      <mat-icon matPrefix>search</mat-icon>
+      <button mat-icon-button matSuffix color="primary" [disabled]="searchProductForm.invalid" type="submit">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+
+  <!-- Liste des produits -->
+  <div class="product-list" *ngIf="products && products.length > 0">
+    <mat-card class="product-card" *ngFor="let product of products">
+      <div class="product-image">
+        <img [src]="product.processedImg" alt="product-image" (error)="product.processedImg = 'assets/default-product.png'">
+        <div class="product-badge" *ngIf="product.categoryName">{{product.categoryName}}</div>
+      </div>
+      
+      <div class="product-details">
+        <h2 class="product-name">{{product.name}}</h2>
+        <p class="product-description">{{product.description}}</p>
+        
+        <mat-divider></mat-divider>
+        
+        <div class="product-info">
+          <div class="info-row">
+            <span class="info-label">Prix:</span>
+            <span class="info-value">{{product.price}} TND</span>
+          </div>
+          <div class="info-row">
+        <span class="info-label">Note:</span>
+        <span class="info-value rating">
+          {{ product.averageRating | number:'1.1-1' }}/5
+          <mat-icon *ngFor="let i of [1,2,3,4,5]" [ngClass]="{'active': i <= product.averageRating}">{{ i <= product.averageRating ? 'star' : 'star_border' }}</mat-icon>
+        </span>
+      </div>
+
+        </div>
+
+        <mat-divider></mat-divider>
+        
+        <div class="actions">
+          <button mat-raised-button color="primary" class="action-btn faq-btn" 
+                 [routerLink]="'/admin/faq/' + product.id">
+            <mat-icon>help</mat-icon>
+            FAQ
+          </button>
+
+          <button mat-raised-button color="accent" class="action-btn update-btn" 
+                 [routerLink]="'/admin/product/' + product.id">
+            <mat-icon>edit</mat-icon>
+            Modifier
+          </button>
+
+          <button mat-raised-button color="warn" class="action-btn delete-btn" 
+                 (click)="deleteProduct(product.id)">
+            <mat-icon>delete</mat-icon>
+            Supprimer
+          </button>
+<a class="see-more-link"
+   [routerLink]="['/admin/product/detail', product.id]"
+   [attr.aria-label]="'View more details about ' + product.name">
+  <mat-icon>visibility</mat-icon>
+  Voir plus
+</a>
+
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- État vide -->
+  <div class="empty-state" *ngIf="!products || products.length === 0">
+    <mat-icon class="empty-icon">inventory_2</mat-icon>
+    <span class="empty-text">Aucun produit trouvé</span>
+    <button mat-raised-button color="primary" class="add-product-btn" routerLink="/admin/product">
+      <mat-icon>add</mat-icon>
+      Ajouter un produit
+    </button>
+  </div>
+</div>
+

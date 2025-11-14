@@ -1,0 +1,168 @@
+/* Container principal */
+.orders-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Tableau des commandes */
+.orders-table {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+/* En-têtes */
+.mat-header-cell {
+    background: #f8f9fa !important;
+    color: #2c3e50 !important;
+    font-weight: 600 !important;
+    font-size: 14px;
+    padding: 16px 12px !important;
+    border-bottom: 2px solid #dee2e6;
+}
+
+/* Cellules */
+.mat-cell {
+    padding: 16px 12px !important;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 14px;
+}
+
+/* Lignes */
+.mat-row {
+    transition: background-color 0.3s ease;
+}
+
+.mat-row:hover {
+    background: #f8f9fa !important;
+}
+
+.mat-row:nth-child(even) {
+    background: #fafafa;
+}
+
+/* Styles spécifiques aux colonnes */
+.tracking-id {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.amount {
+    font-weight: 700;
+    color: #27ae60;
+}
+
+.description {
+    color: #5d6d7e;
+}
+
+.address {
+    color: #7f8c8d;
+}
+
+.date {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.status {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* Boutons d'action */
+.review-btn {
+    background: #27ae60 !important;
+    color: white !important;
+    padding: 6px 16px !important;
+    font-size: 12px !important;
+    border-radius: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+/* État vide */
+.no-orders {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.no-orders-icon {
+    font-size: 80px;
+    width: 80px;
+    height: 80px;
+    color: #bdc3c7;
+    margin-bottom: 20px;
+}
+
+.no-orders h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.no-orders p {
+    color: #7f8c8d;
+    margin-bottom: 25px;
+    font-size: 16px;
+}
+
+.shop-btn {
+    background: #3498db !important;
+    color: white !important;
+    padding: 12px 30px;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .orders-container {
+        padding: 16px;
+    }
+    
+    .page-title {
+        font-size: 24px;
+    }
+    
+    .mat-header-cell,
+    .mat-cell {
+        padding: 12px 8px !important;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .orders-container {
+        padding: 10px;
+    }
+    
+    .no-orders {
+        padding: 40px 15px;
+    }
+    
+    .no-orders-icon {
+        font-size: 60px;
+        width: 60px;
+        height: 60px;
+    }
+}

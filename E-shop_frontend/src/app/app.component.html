@@ -1,0 +1,154 @@
+<!-- ✅ Enhanced Navigation & Footer - Version Française -->
+<div class="app-container">
+  <!-- Navigation Visiteur -->
+  <ng-container *ngIf="!isCustomerLoggedIn && !isAdminLoggedIn">
+    <mat-toolbar class="navbar guest-nav">
+      <div class="nav-content">
+        <span class="navbar-brand">
+          <span class="brand-icon">🛒</span>
+          EcoShop
+        </span>
+        <span class="spacer"></span>
+        <div class="nav-actions">
+          <button mat-stroked-button class="nav-btn" routerLink="/order" routerLinkActive="active">
+            <mat-icon>track_changes</mat-icon>
+            Suivi Commande
+          </button>
+          <button mat-flat-button class="nav-btn primary-btn" routerLink="/signup" routerLinkActive="active">
+            <mat-icon>person_add</mat-icon>
+            S'inscrire
+          </button>
+          <button mat-flat-button class="nav-btn secondary-btn" routerLink="/login" routerLinkActive="active">
+            <mat-icon>login</mat-icon>
+            Connexion
+          </button>
+        </div>
+      </div>
+    </mat-toolbar>
+  </ng-container>
+
+  <!-- Navigation Administrateur -->
+  <ng-container *ngIf="isAdminLoggedIn">
+    <mat-toolbar class="navbar admin-nav">
+      <div class="nav-content">
+        <span class="navbar-brand">
+          <span class="brand-icon">⚡</span>
+          Panel Admin
+        </span>
+        <span class="spacer"></span>
+        <div class="nav-actions">
+          <button mat-button class="nav-btn" routerLink="/admin/dashboard" routerLinkActive="active">
+            <mat-icon>dashboard</mat-icon> Tableau de Bord
+          </button>
+          <button mat-button class="nav-btn" routerLink="/admin/analytics" routerLinkActive="active">
+            <mat-icon>analytics</mat-icon> Analytics
+          </button>
+          <button mat-button class="nav-btn" routerLink="/admin/category" routerLinkActive="active">
+            <mat-icon>category</mat-icon> Catégories
+          </button>
+          <button mat-button class="nav-btn" routerLink="/admin/product" routerLinkActive="active">
+            <mat-icon>inventory_2</mat-icon> Produits
+          </button>
+          <button mat-button class="nav-btn" routerLink="/admin/orders" routerLinkActive="active">
+            <mat-icon>receipt</mat-icon> Commandes
+          </button>
+          <button mat-button class="nav-btn" routerLink="/admin/post-coupon" routerLinkActive="active">
+            <mat-icon>local_offer</mat-icon> Créer Coupon
+          </button>
+          <button mat-button class="nav-btn" routerLink="/admin/coupons" routerLinkActive="active">
+            <mat-icon>confirmation_number</mat-icon> Coupons
+          </button>
+          <button mat-stroked-button class="nav-btn logout-btn" (click)="logout()">
+            <mat-icon>logout</mat-icon> Déconnexion
+          </button>
+        </div>
+      </div>
+    </mat-toolbar>
+  </ng-container>
+
+  <!-- Navigation Client -->
+  <ng-container *ngIf="isCustomerLoggedIn">
+    <mat-toolbar class="navbar customer-nav">
+      <div class="nav-content">
+        <span class="navbar-brand">
+          <span class="brand-icon">🛍️</span>
+          EcoShop
+        </span>
+        <span class="spacer"></span>
+        <div class="nav-actions">
+          <button mat-button class="nav-btn" routerLink="/customer/dashboard" routerLinkActive="active">
+            <mat-icon>home</mat-icon> Accueil
+          </button>
+          <button mat-button class="nav-btn" routerLink="/customer/cart" routerLinkActive="active">
+            <mat-icon>shopping_cart</mat-icon> Panier
+            
+          </button>
+          <button mat-button class="nav-btn" routerLink="/customer/my_orders" routerLinkActive="active">
+            <mat-icon>receipt_long</mat-icon> Mes Commandes
+          </button>
+          <button mat-button class="nav-btn" routerLink="/customer/wishlist" routerLinkActive="active">
+            <mat-icon>favorite</mat-icon> Favoris
+          </button>
+          <button mat-button class="nav-btn" routerLink="/customer/profile" routerLinkActive="active">
+            <mat-icon>person</mat-icon> Mon Profil
+          </button>
+          <button mat-stroked-button class="nav-btn logout-btn" (click)="logout()">
+            <mat-icon>logout</mat-icon> Déconnexion
+          </button>
+        </div>
+      </div>
+    </mat-toolbar>
+  </ng-container>
+
+  <!-- Contenu Principal -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- ✅ Pied de Page Amélioré -->
+  <footer class="footer">
+    <div class="footer-wave"></div>
+
+    <div class="footer-container">
+      <!-- Colonne 1 -->
+      <div class="footer-section">
+        <div class="footer-logo">
+          <span class="brand-icon">🛒</span>
+          <span class="footer-brand">EcoShop</span>
+        </div>
+        <p class="footer-description">
+          Votre destination shopping premium avec des produits de qualité et un service exceptionnel.
+        </p>
+        <div class="contact-info">
+          <p><mat-icon>call</mat-icon> +216 55 123 456</p>
+          <p><mat-icon>email</mat-icon> contact@ecoshop.com</p>
+          <p><mat-icon>location_on</mat-icon> Tunis, Tunisie</p>
+        </div>
+      </div>
+
+
+
+      <!-- Colonne 3 -->
+      <div class="footer-section">
+        <h3>Suivez-nous</h3>
+        <div class="social-icons">
+          <a href="https://facebook.com" target="_blank" class="social-link facebook"><mat-icon>facebook</mat-icon></a>
+          <a href="https://instagram.com" target="_blank" class="social-link instagram"><mat-icon>instagram</mat-icon></a>
+          <a href="https://twitter.com" target="_blank" class="social-link twitter"><mat-icon>twitter</mat-icon></a>
+          <a href="https://linkedin.com" target="_blank" class="social-link linkedin"><mat-icon>linkedin</mat-icon></a>
+        </div>
+
+       
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 EcoShop. Tous droits réservés.</p>
+      
+      <div class="support-badge">
+        <mat-icon>support_agent</mat-icon>
+        <span>Support 24h/24</span>
+      </div>
+    </div>
+  </footer>
+</div>

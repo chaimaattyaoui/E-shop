@@ -1,0 +1,66 @@
+
+  <div class="product-detail-page">
+
+  <!-- ✅ Produit Principal -->
+  <div class="product-section" *ngIf="product">
+    <div class="product-container">
+      <div class="image-section">
+        <img [src]="product.processedImg" alt="{{product.name}}" class="product-img">
+      </div>
+
+      <div class="info-section">
+        <h1 class="product-name">{{product.name}}</h1>
+        <p class="product-description">{{product.description}}</p>
+
+        <div class="price-category">
+          <div class="price">
+            <span class="price-amount">{{product.price}} TND</span>
+          </div>
+          <div class="category">
+            <span class="category-tag">{{product.categoryName}}</span>
+          </div>
+        </div>
+
+        <button class="wishlist-btn creative-1" (click)="addToWishlist()">
+          <div class="heart-container" [class.favorited]="isInWishlist">
+            <div class="heart-shape"></div>
+            <span class="btn-text">{{ isInWishlist ? 'Déjà dans ma liste ❤️' : 'Ajouter à ma liste' }}</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Section Avis Clients -->
+  <div class="reviews-section" *ngIf="reviews && reviews.length > 0">
+    <h2>Avis des clients</h2>
+    <div class="review-card" *ngFor="let review of reviews">
+      <div class="review-image" *ngIf="review.processedImg">
+        <img [src]="review.processedImg" alt="Image avis" class="small-img">
+      </div>
+      <div class="review-content">
+        <p class="review-text">{{review.description}}</p>
+        <p class="review-meta">⭐ {{review.rating}} / 5 — Par {{review.username}}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ Section FAQ -->
+  <div class="faq-section" *ngIf="FAQS && FAQS.length > 0">
+    <h2>Questions fréquentes</h2>
+    <div class="faq-card" *ngFor="let faq of FAQS">
+      <p class="faq-question">❓ {{faq.question}}</p>
+      <p class="faq-answer">✅ {{faq.answer}}</p>
+    </div>
+  </div>
+
+  <!-- ✅ Messages quand vide -->
+  <div class="empty-message" *ngIf="reviews && reviews.length === 0">
+    <p>📝 Aucun avis pour ce produit</p>
+  </div>
+
+  <div class="empty-message" *ngIf="FAQS && FAQS.length === 0">
+    <p>❓ Aucune question fréquente</p>
+  </div>
+</div>
+

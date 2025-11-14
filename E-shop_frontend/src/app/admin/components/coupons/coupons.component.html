@@ -1,0 +1,52 @@
+<div class="coupons-container">
+  <h2>Gérer les codes promo</h2>
+
+  <!-- Table of coupons -->
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="coupons" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="discount">
+        <th mat-header-cell *matHeaderCellDef> Réduction </th>
+        <td mat-cell *matCellDef="let element"> {{element.discount}}% </td>
+      </ng-container>
+
+      <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef> Code </th>
+        <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expirationDate">
+        <th mat-header-cell *matHeaderCellDef> Date d'expiration </th>
+        <td mat-cell *matCellDef="let element"> {{element.expirationDate | date:'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef> Créé le </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdAt | date:'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button color="warn" (click)="deleteCoupon(element.id)" aria-label="Supprimer le coupon">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <!-- Empty state if no coupons -->
+  <div class="empty-state" *ngIf="coupons.length === 0">
+    <mat-icon class="empty-icon">local_offer</mat-icon>
+    <h3 class="empty-text">Aucun code promo disponible</h3>
+    <p class="empty-subtext">Ajoutez un nouveau code promo pour commencer.</p>
+  </div>
+</div>

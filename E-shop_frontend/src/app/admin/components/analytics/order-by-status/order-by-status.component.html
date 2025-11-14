@@ -1,0 +1,40 @@
+<div class="order-status-container">
+    <mat-card class="order-status-card placed-card">
+        <mat-card-header>
+            <div mat-card-avatar class="status-avatar">
+                <mat-icon>schedule</mat-icon>
+            </div>
+            <mat-card-title>Commandées</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="status-value">{{data.placed}}</div>
+            <div class="status-subtitle">En attente</div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="order-status-card shipped-card">
+        <mat-card-header>
+            <div mat-card-avatar class="status-avatar">
+                <mat-icon>local_shipping</mat-icon>
+            </div>
+            <mat-card-title>Expédiées</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="status-value">{{data.shipped}}</div>
+            <div class="status-subtitle">En transit</div>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="order-status-card delivered-card">
+        <mat-card-header>
+            <div mat-card-avatar class="status-avatar">
+                <mat-icon>check_circle</mat-icon>
+            </div>
+            <mat-card-title>Livrées</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="status-value">{{data.delivered}}</div>
+            <div class="status-subtitle">Terminées</div>
+        </mat-card-content>
+    </mat-card>
+</div>

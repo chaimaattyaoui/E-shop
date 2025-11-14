@@ -1,0 +1,90 @@
+<div class="products-container">
+  <!-- Search Form -->
+  <form [formGroup]="searchProductForm" class="search-form" (submit)="submitForm()">
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Rechercher un produit</mat-label>
+      <input matInput formControlName="title" placeholder="Entrez le nom d'un produit...">
+      <mat-icon matPrefix>search</mat-icon>
+      <button mat-icon-button matSuffix color="primary" [disabled]="searchProductForm.invalid" type="submit">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+
+  <!-- Products Grid -->
+  <div class="product-list">
+    <mat-card class="product-card" *ngFor="let product of products; let i = index" 
+              [attr.aria-label]="'Product card for ' + product.name">
+      
+      <!-- Product Image -->
+      <div class="product-image">
+        <img [src]="product.processedImg" 
+             [alt]="product.name + ' image'" 
+             (error)="product.processedImg = 'assets/default-product.png'" 
+             loading="lazy">
+        <div class="product-badge" *ngIf="product.categoryName" 
+             [attr.aria-label]="'Category: ' + product.categoryName">
+          {{product.categoryName}}
+        </div>
+      </div>
+      
+      <!-- Product Details -->
+      <div class="product-details">
+        <h2 class="product-name">{{product.name}}</h2>
+        <p class="product-description">{{product.description}}</p>
+        
+        <mat-divider></mat-divider>
+        
+        <!-- Product Info -->
+        <div class="product-info">
+          <div class="info-row">
+            <span class="info-label">Price:</span>
+            <span class="info-value price">{{product.price}} TND</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Rating:</span>
+            <span class="info-value rating" 
+                  [attr.aria-label]="'Rating: ' + (product.averageRating | number:'1.1-1') + ' out of 5'">
+              <span class="rating-value">{{ product.averageRating | number:'1.1-1' }}/5</span>
+              <div class="stars-container">
+                <mat-icon *ngFor="let i of [1,2,3,4,5]" 
+                          [class.filled]="i <= product.averageRating"
+                          aria-hidden="true">
+                  {{ i <= product.averageRating ? 'star' : 'star_border' }}
+                </mat-icon>
+              </div>
+            </span>
+          </div>
+        </div>
+
+        <mat-divider></mat-divider>
+        
+        <!-- Actions -->
+        <div class="actions">
+     <button mat-raised-button color="primary" class="cart-btn" (click)="addToCart(product.id)" [attr.aria-label]="'Add ' + product.name + ' to cart'">
+        <mat-icon>shopping_cart</mat-icon>
+        Add to Cart
+      </button>
+          <a class="see-more-link" 
+             routerLink="/customer/product/{{product.id}}" 
+             [attr.aria-label]="'View more details about ' + product.name">
+            <mat-icon>visibility</mat-icon>
+            View Details
+          </a>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="products.length === 0">
+      <mat-icon class="empty-icon">inventory_2</mat-icon>
+      <h2 class="empty-text">No products found</h2>
+      <button mat-raised-button class="add-product-btn" routerLink="/admin/add-product">
+        <mat-icon>add</mat-icon>
+        Add New Product
+      </button>
+    </div>
+  </div>
+</div>
+
+

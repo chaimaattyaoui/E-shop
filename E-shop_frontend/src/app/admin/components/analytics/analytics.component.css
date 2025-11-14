@@ -1,0 +1,171 @@
+/* Container principal */
+.dashboard-container {
+    padding: 20px;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+/* Section graphique */
+.chart-section {
+    margin-bottom: 30px;
+}
+
+/* Container analytics */
+.analytics-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Cartes de métriques */
+.analytics-card {
+    width: 300px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background: white;
+}
+
+.analytics-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Carte Commandes - Vert Émeraude */
+.orders-card {
+    border-top: 4px solid #4CAF50;
+}
+
+.orders-card .metric-avatar {
+    background: #4CAF50;
+}
+
+.orders-card .metric-value {
+    color: #4CAF50;
+}
+
+/* Carte Revenus - Violet Magenta */
+.earnings-card {
+    border-top: 4px solid #FF00FF;
+}
+
+.earnings-card .metric-avatar {
+    background: #FF00FF;
+}
+
+.earnings-card .metric-value {
+    color: #FF00FF;
+}
+
+/* Avatar des métriques */
+.metric-avatar {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.metric-avatar mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+/* En-tête des cartes */
+mat-card-header {
+    padding: 20px 20px 10px 20px;
+}
+
+.mat-card-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Contenu des métriques */
+.metrics-content {
+    padding: 0 !important;
+}
+
+.current-month, .previous-month {
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.current-month {
+    background: white;
+}
+
+.previous-month {
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Valeurs des métriques */
+.metric-value {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.metric-subtext {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 15px;
+    }
+    
+    .analytics-container {
+        gap: 20px;
+    }
+    
+    .analytics-card {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .current-month, .previous-month {
+        padding: 12px 15px;
+    }
+    
+    .metric-value {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-container {
+        padding: 10px;
+    }
+    
+    .analytics-container {
+        gap: 15px;
+    }
+    
+    mat-card-header {
+        padding: 15px 15px 8px 15px;
+    }
+    
+    .metric-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .metric-avatar mat-icon {
+        font-size: 20px;
+    }
+    
+    .mat-card-title {
+        font-size: 18px;
+    }
+}

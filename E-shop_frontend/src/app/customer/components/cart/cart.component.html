@@ -1,0 +1,93 @@
+<div *ngIf="cartItems.length > 0; else emptyCart">
+    <div class="cart-container">
+        <h2 class="cart-title">Mon Panier</h2>
+        
+        <div class="cart-items">
+            <div class="cart-item" *ngFor="let item of cartItems">
+                <div class="product-info">
+                    <img [src]="item.processedImg" alt="product-image" class="product-image"/>
+                </div>
+                <div class="product-details">
+                    <div class="item-row">
+                        <div class="item-name" [ngClass]="{ 'highlight': item.highlighted }">
+                            {{ item.productName }}
+                        </div>
+                        <div class="item-price">{{ item.price | currency }}</div>
+                        <button mat-icon-button color="warn" (click)="removeProduct(item.productId)">
+                              <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    <div class="quantity-section">
+                        <div class="quantity-controls">
+                            <button mat-icon-button [disabled]="item.quantity == 1" (click)="decreaseQuantity(item.productId)" class="qty-btn">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                            <span class="quantity">{{ item.quantity }}</span>
+                            <button mat-icon-button (click)="increaseQuantity(item.productId)" class="qty-btn">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </div>
+                        <div class="item-total">
+                            Total: {{ (item.price * item.quantity) | currency }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="order-summary">
+<div class="summary-item">
+    <span>Sous-total:</span>
+    <span>{{ order.totalAmount | currency }}</span>
+</div>
+            
+<div class="summary-item" *ngIf="order.couponName != null">
+    <span>Coupon "{{ order.couponName }}" appliqué:</span>
+    <span class="discount">- {{ (order.totalAmount - order.amount) | currency }}</span>
+</div>
+            
+<div class="summary-item total">
+    <span>Montant total:</span>
+    <span class="total-amount">{{ order.amount | currency }}</span>
+</div>
+        </div>
+
+        <div class="actions">
+            <button mat-raised-button color="primary" class="place-order-btn" (click)="placeOrder()">
+                <mat-icon>shopping_bag</mat-icon>
+                Passer la commande
+            </button>
+        </div>
+
+        <div class="coupon-section" *ngIf="showCouponSection">
+            <h3>Code promo</h3>
+            <form [formGroup]="couponForm" (ngSubmit)="applyCoupon()" class="coupon-form">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Entrez votre code promo</mat-label>
+                    <input matInput type="text" placeholder="EXEMPLE20" formControlName="code"/>
+                    <mat-icon matPrefix>local_offer</mat-icon>
+                    <mat-error *ngIf="couponForm.get('code')?.hasError('required')">
+                        Le code est requis
+                    </mat-error>
+                </mat-form-field>
+                <button mat-raised-button color="accent" type="submit" class="coupon-btn">
+                    <mat-icon>confirmation_number</mat-icon>
+                    Appliquer
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<ng-template #emptyCart>
+    <div class="empty-cart">
+        <mat-icon class="empty-icon">remove_shopping_cart</mat-icon>
+        <h2>Votre panier est vide</h2>
+        <p>Découvrez nos produits et ajoutez-les à votre panier</p>
+        <button mat-raised-button color="primary" routerLink="/customer/dashboard" class="shop-btn">
+            <mat-icon>shopping_basket</mat-icon>
+            Commencer mes achats
+        </button>
+    </div>
+</ng-template>
+

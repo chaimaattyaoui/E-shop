@@ -1,0 +1,91 @@
+<div class="container">
+    <mat-card class="coupon-card">
+        <mat-card-header class="card-header">
+            <mat-card-title>Créer un code promo</mat-card-title>
+            <mat-card-subtitle>Ajoutez une nouvelle offre promotionnelle</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <form [formGroup]="couponForm" (ngSubmit)="addCoupon()" class="coupon-form">
+                <!-- Nom du coupon -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Nom de l'offre</mat-label>
+                    <input matInput placeholder="Ex: Offre Spéciale Été" formControlName="name" maxlength="50"/>
+                    <mat-icon matPrefix>local_offer</mat-icon>
+                    <mat-hint>{{ name?.value?.length || 0 }}/50</mat-hint>
+                    <mat-error *ngIf="name?.hasError('required')">
+                        Le nom est obligatoire
+                    </mat-error>
+                    <mat-error *ngIf="name?.hasError('minlength')">
+                        Minimum 3 caractères
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Code du coupon -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Code promo</mat-label>
+                    <input matInput placeholder="Ex: ETE2024" formControlName="code" 
+                           (input)="onCodeInput($event)" maxlength="20" uppercase/>
+                    <mat-icon matPrefix>confirmation_number</mat-icon>
+                    <mat-hint>{{ code?.value?.length || 0 }}/20 (lettres et chiffres uniquement)</mat-hint>
+                    <mat-error *ngIf="code?.hasError('required')">
+                        Le code est obligatoire
+                    </mat-error>
+                    <mat-error *ngIf="code?.hasError('minlength')">
+                        Minimum 3 caractères
+                    </mat-error>
+                    <mat-error *ngIf="code?.hasError('invalidCode')">
+                        Lettres majuscules et chiffres uniquement
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Pourcentage de remise -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Pourcentage de remise</mat-label>
+                    <input matInput type="number" placeholder="Ex: 20" formControlName="discount" 
+                           min="1" max="100" step="1"/>
+    
+                    <mat-icon matSuffix>percent</mat-icon>
+                    <mat-hint>Entre 1% et 100%</mat-hint>
+                    <mat-error *ngIf="discount?.hasError('required')">
+                        Le pourcentage est obligatoire
+                    </mat-error>
+                    <mat-error *ngIf="discount?.hasError('minDiscount')">
+                        Minimum 1%
+                    </mat-error>
+                    <mat-error *ngIf="discount?.hasError('maxDiscount')">
+                        Maximum 100%
+                    </mat-error>
+                    <mat-error *ngIf="discount?.hasError('invalidNumber')">
+                        Doit être un nombre valide
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Date d'expiration -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Date d'expiration</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="expirationDate" 
+                           [min]="minDate" [max]="maxDate"/>
+                    <mat-hint>JJ/MM/AAAA - Valide jusqu'au {{ expirationDate?.value | date:'dd/MM/yyyy' }}</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>calendar_today</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="expirationDate?.hasError('required')">
+                        La date d'expiration est obligatoire
+                    </mat-error>
+                    <mat-error *ngIf="expirationDate?.hasError('notFutureDate')">
+                        La date doit être supérieure à aujourd'hui
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- Bouton de soumission -->
+                <button mat-raised-button color="primary" type="submit" 
+                        [disabled]="couponForm.invalid" class="submit-btn">
+                    <mat-icon>add_circle</mat-icon>
+                    Créer le code promo
+                </button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
