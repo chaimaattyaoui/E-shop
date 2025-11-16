@@ -51,5 +51,5 @@ Backend
 Lancer : mvn spring-boot:run
 
 Frontend
-npm install
-ng serve -o
+1) npm install
+2) ng serve -o
