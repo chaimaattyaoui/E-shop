@@ -46,7 +46,6 @@ Stockage images : Cloudinary
 Outils : IntelliJ IDEA, VS Code, Postman, Git
 
 🛠️ Installation
-git clone https://github.com/username/e-shop.git
 
 Backend
 Lancer : mvn spring-boot:run
